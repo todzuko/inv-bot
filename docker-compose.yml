@@ -1,0 +1,20 @@
+services:
+  application:
+    build: .
+    depends_on:
+      - redis
+      - mongo
+    volumes:
+      - ./:/data
+    ports:
+      - '8084:8084'
+  redis:
+    image: redis:latest
+    restart: on-failure
+    ports:
+      - '6384:6384'
+  mongo:
+    image: mongo:latest
+    restart: on-failure
+    ports:
+      - '27017:27017'
