@@ -1,22 +1,16 @@
 package main
 
 import (
-	"log"
-	"net"
-	"net/http"
+	"github.com/joho/godotenv"
 )
 
 func main() {
-	address := "0.0.0.0:8084"
-	mux := http.NewServeMux()
-	mux.HandleFunc("/", func(writer http.ResponseWriter, request *http.Request) {
-		writer.WriteHeader(http.StatusOK)
-	})
-	listener, err := net.Listen("tcp", address)
+	loadEnv()
+}
+
+func loadEnv() {
+	err := godotenv.Load("/data/.env")
 	if err != nil {
-		log.Fatal(err)
-	}
-	if err = http.Serve(listener, mux); err != nil {
-		log.Fatal(err)
+		panic("err loading: " + err.Error())
 	}
 }
