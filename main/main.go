@@ -4,13 +4,12 @@ import (
 	"log"
 	"net"
 	"net/http"
-	"os"
 )
 
 func main() {
-	address := os.Getenv("ADDR")
+	address := "0.0.0.0:8084"
 	mux := http.NewServeMux()
-	mux.HandleFunc("/status", func(writer http.ResponseWriter, request *http.Request) {
+	mux.HandleFunc("/", func(writer http.ResponseWriter, request *http.Request) {
 		writer.WriteHeader(http.StatusOK)
 	})
 	listener, err := net.Listen("tcp", address)
