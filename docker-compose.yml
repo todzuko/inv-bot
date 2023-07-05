@@ -8,13 +8,22 @@ services:
       - ./:/data
     ports:
       - '8084:8084'
+    networks:
+      - bot
   redis:
     image: redis:latest
     restart: on-failure
     ports:
       - '6384:6384'
+    networks:
+      - bot
   mongo:
     image: mongo:latest
     restart: on-failure
     ports:
       - '27017:27017'
+    networks:
+      - bot
+networks:
+  bot:
+    driver: bridge

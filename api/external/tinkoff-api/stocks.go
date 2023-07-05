@@ -1,7 +1,6 @@
 package tinkoff_api
 
 import (
-	"fmt"
 	"github.com/tinkoff/invest-api-go-sdk/investgo"
 	investapi "github.com/tinkoff/invest-api-go-sdk/proto"
 	"go.uber.org/zap"
@@ -31,7 +30,7 @@ func GetDividendStocks(limit int) *[]DividendStock {
 		if instrument.Currency == "rub" && instrument.DivYieldFlag == true && instrument.LiquidityFlag == true {
 			divs, err = instrumentsService.GetDividents(instrument.Figi, time.Now(), time.Now().AddDate(0, 6, 0))
 			if err != nil {
-				fmt.Println(instrument.Name, err)
+				logger.Infof(err.Error())
 			}
 			if err == nil && len(divs.Dividends) > 0 {
 				processDividendStock(instrument, divs, &divStocks, limit)
