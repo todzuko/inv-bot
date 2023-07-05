@@ -1,7 +1,7 @@
 FROM golang:alpine
 WORKDIR /build
 COPY . .
-RUN go get -d -v ./...
+RUN go mod download
 RUN go install -v ./...
 RUN go build -o target ./main
 
