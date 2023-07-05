@@ -5,7 +5,7 @@ import (
 	"github.com/todzuko/inv-bot/api/helpers"
 )
 
-func Notify() string {
-	stocks := tinkoff_api.Instr()
+func Notify(chat int64) string {
+	stocks := tinkoff_api.Instr(chat)
 	return helpers.ConstructReport(stocks)
 }
