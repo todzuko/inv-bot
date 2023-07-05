@@ -35,9 +35,6 @@ func GetDividendStocks(limit int) *[]DividendStock {
 			}
 			if err == nil && len(divs.Dividends) > 0 {
 				processDividendStock(instrument, divs, &divStocks, limit)
-				if divs.Dividends[0].YieldValue.Units > int64(limit) {
-					break
-				}
 			}
 		}
 	}
